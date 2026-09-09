@@ -14,6 +14,10 @@ The platform behind the publication, open-sourced.
 
 Roughly 1,600 series from twenty-odd primary sources — EIA, GIE, ENTSO-E, ENTSOG, CFTC, OPEC, JODI, Baker Hughes, OFAC, AIS — land in a DuckDB and Parquet lake on one laptop. A publish step promotes a serving copy to Postgres under row-level security. Two Next.js sites and a Streamlit app read it. The serving layer is a public read-only API with no write path, which is why its key sits openly in the browser bundle.
 
+[![The weekly US crude balance, and where it fails to close](https://raw.githubusercontent.com/rikokardamow/energy-dashboard/main/docs/screenshots/data-oil-math.png)](https://data.kardamow.com)
+
+*The weekly crude balance and its residual. The identity is `Δ(commercial + SPR stocks) = production + imports − exports − runs + adjustment`. The adjustment is not a rounding error — EIA publishes it because the components come from different surveys — so it gets its own line rather than being absorbed silently.*
+
 It is opinionated about correctness in ways most dashboards are not, and that is the part worth reading:
 
 - **Seasonal maths always excludes 2020**, by rule, in one shared module — never reimplemented per page.
