@@ -4,7 +4,7 @@ Independent research on the seam where energy, finance and geopolitics meet — 
 
 Most energy commentary is either a seminar with no contact with the molecule, or a price feed with no memory. The work sits at the join: close enough to know how a barrel actually moves, far enough back to see the belief that is moving it.
 
-[**The writing**](https://kardamow.substack.com) · [**The data**](https://data.kardamow.com) · [**About**](https://kardamow.com)
+[**The writing**](https://kardamow.substack.com) · [**The code**](https://github.com/rikokardamow/energy-dashboard)
 
 ---
 
@@ -12,9 +12,9 @@ Most energy commentary is either a seminar with no contact with the molecule, or
 
 The platform behind the publication, open-sourced.
 
-Roughly 1,600 series from twenty-odd primary sources — EIA, GIE, ENTSO-E, ENTSOG, CFTC, OPEC, JODI, Baker Hughes, OFAC, AIS — land in a DuckDB and Parquet lake on one laptop. A publish step promotes a serving copy to Postgres under row-level security. Two Next.js sites and a Streamlit app read it. The serving layer is a public read-only API with no write path, which is why its key sits openly in the browser bundle.
+Roughly 1,600 series from twenty-odd primary sources — EIA, GIE, ENTSO-E, ENTSOG, CFTC, OPEC, JODI, Baker Hughes, OFAC, AIS — land in a DuckDB and Parquet lake on one laptop. A publish step promotes a serving copy to Postgres under row-level security. Two Next.js sites and a Streamlit app read it. The serving layer is a read-only API with no write path, which is why its key sits openly in the browser bundle.
 
-[![The weekly US crude balance, and where it fails to close](https://raw.githubusercontent.com/rikokardamow/energy-dashboard/main/docs/screenshots/data-oil-math.png)](https://data.kardamow.com)
+[![The weekly US crude balance, and where it fails to close](https://raw.githubusercontent.com/rikokardamow/energy-dashboard/main/docs/screenshots/data-oil-math.png)](https://github.com/rikokardamow/energy-dashboard)
 
 *The weekly crude balance and its residual. The identity is `Δ(commercial + SPR stocks) = production + imports − exports − runs + adjustment`. The adjustment is not a rounding error — EIA publishes it because the components come from different surveys — so it gets its own line rather than being absorbed silently.*
 
@@ -40,4 +40,4 @@ MIT for the code. The data is not mine to relicense — every source keeps its o
 
 ---
 
-Reachable through [kardamow.com](https://kardamow.com).
+Reachable through [the publication](https://kardamow.substack.com).
