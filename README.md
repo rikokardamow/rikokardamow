@@ -1,20 +1,20 @@
-## Kardamow
+## Supply or Demand? You build.
 
 Independent research on the seam where energy, finance and geopolitics meet — and the data platform underneath it.
 
 Most energy commentary is either a seminar with no contact with the molecule, or a price feed with no memory. The work sits at the join: close enough to know how a barrel actually moves, far enough back to see the belief that is moving it.
 
-[**The writing**](https://kardamow.substack.com) · [**The code**](https://github.com/rikokardamow/energy-dashboard)
+[**The code**](https://github.com/rikokardamow/supply-or-demand)
 
 ---
 
-### energy-dashboard
+### supply-or-demand
 
 The platform behind the publication, open-sourced.
 
 Roughly 1,600 series from twenty-odd primary sources — EIA, GIE, ENTSO-E, ENTSOG, CFTC, OPEC, JODI, Baker Hughes, OFAC, AIS — land in a DuckDB and Parquet lake on one laptop. A publish step promotes a serving copy to Postgres under row-level security. Two Next.js sites and a Streamlit app read it. The serving layer is a read-only API with no write path, which is why its key sits openly in the browser bundle.
 
-[![The weekly US crude balance, and where it fails to close](https://raw.githubusercontent.com/rikokardamow/energy-dashboard/main/docs/screenshots/data-oil-math.png)](https://github.com/rikokardamow/energy-dashboard)
+[![The weekly US crude balance, and where it fails to close](https://raw.githubusercontent.com/rikokardamow/supply-or-demand/main/docs/screenshots/data-oil-math.png)](https://github.com/rikokardamow/supply-or-demand)
 
 *The weekly crude balance and its residual. The identity is `Δ(commercial + SPR stocks) = production + imports − exports − runs + adjustment`. The adjustment is not a rounding error — EIA publishes it because the components come from different surveys — so it gets its own line rather than being absorbed silently.*
 
@@ -26,7 +26,7 @@ It is opinionated about correctness in ways most dashboards are not, and that is
 - **Colour never carries meaning alone.** Direction shows a sign as well as a hue, and the heat wash is balanced by measurement rather than by eye — so a build is exactly as visible as a draw.
 - **Failures are loud.** A partial run exits non-zero instead of reporting success, and credentials are redacted from exception text before it is ever printed.
 
-MIT for the code. The data is not mine to relicense — every source keeps its own terms, and several restrict commercial use.
+MIT for the code. The data is not the project's to relicense — every source keeps its own terms, and several restrict commercial use.
 
 ---
 
@@ -40,4 +40,4 @@ MIT for the code. The data is not mine to relicense — every source keeps its o
 
 ---
 
-Reachable through [the publication](https://kardamow.substack.com).
+Reachable through [the repository](https://github.com/rikokardamow/supply-or-demand/issues).
