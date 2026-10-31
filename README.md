@@ -18,4 +18,4 @@ I came to this from finance and data work, where much of the job was cleaning nu
 
 **Tools:** Python, SQL, DuckDB, Postgres, pandas, matplotlib, Next.js. Public data from the EIA, Energinet, EirGrid, GIE, ENTSO-E and the CFTC.
 
-**Find me:** [kardamow.com](https://kardamow.com) · [@kardamow on X](https://x.com/kardamow) · [Kardamow on LinkedIn](https://www.linkedin.com/company/kardamow) · riko@kardamow.com
+**Find me:** [kardamow.com](https://kardamow.com) · [@kardamow on X](https://x.com/kardamow) 
