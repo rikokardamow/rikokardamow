@@ -4,6 +4,22 @@ I write [Kardamow](https://kardamow.com), an independent research publication on
 
 What I forecast is frozen and hashed before the number comes out, scored against the first print, and kept when it misses.
 
+#### What I am building for oil, gas and power desks
+
+<p>
+<a href="assets/gallery/hormuz-vessels.png"><img src="assets/gallery/hormuz-vessels.png" width="49%" alt="Sentinel-1 radar image of the Strait of Hormuz approaches with 127 ship detections: 45 with AIS presence nearby, shown as circles, and 82 without, shown as triangles"></a>
+<a href="assets/gallery/weather-t2ma-conus.png"><img src="assets/gallery/weather-t2ma-conus.png" width="49%" alt="Four maps of the contiguous US: the 10 November 2026 ECMWF run's 2 m temperature against the 1991 to 2020 normal at 72, 168, 264 and 360 hours ahead, warmer than normal over most of the map"></a>
+</p>
+
+<sub>**Vessel desk** (private for now): Sentinel-1 radar against AIS in the Hormuz approaches. Of 127 ships seen on radar on 3 Nov 2026, 82 had no AIS nearby: a lead to check on chokepoint flows, never proof (coastal clutter makes 82 an upper bound; about 35 to 56 is plausible). Contains modified Copernicus Sentinel data 2026; AIS presence <a href="https://globalfishingwatch.org">Powered by Global Fishing Watch</a> (CC BY-NC 4.0, non-commercial). **Weather desk** (private for now): ECMWF's 10 Nov 2026 run, US 2 m temperature against the 1991 to 2020 normal out to 15 days: +2.5 °C at 3 days, +1.0 °C at 15, the heating demand gas and power desks trade. One run, not a scored forecast. ECMWF open data (CC BY 4.0), anomaly by me; NCEP-NCAR Reanalysis 1 from NOAA PSL; Natural Earth.</sub>
+
+<p>
+<a href="assets/gallery/balance-waterfall.png"><img src="assets/gallery/balance-waterfall.png" width="49%" alt="Weekly US crude balance: production, imports, exports, refinery runs and the SPR, and what moved on the week"></a>
+<a href="assets/gallery/wti-positioning.png"><img src="assets/gallery/wti-positioning.png" width="49%" alt="Money managers' net position in NYMEX WTI futures, from the CFTC, with open interest"></a>
+</p>
+
+<sub>**What moved US crude this week:** imports rose 324 kb/d, the largest mover, and commercial stocks built 4.7 mb (EIA, week ending 6 Nov 2026). **How crowded WTI is:** money managers are net long 21.7k contracts, the lowest since Dec 2025 and the 2nd percentile since 2010 (CFTC, positions of 3 Nov 2026). Public domain.</sub>
+
 <details>
 <summary>How I came to this</summary>
 
@@ -47,18 +63,13 @@ This is the series behind my weekly forecasting record for US crude stocks, with
 Pages from the public edition of the chart book I build on each EIA weekly release. Click one to open it full size.
 
 <p>
-<a href="assets/gallery/balance-waterfall.png"><img src="assets/gallery/balance-waterfall.png" width="49%" alt="Weekly US crude balance: production, imports, exports, refinery runs and the SPR, and what moved on the week"></a>
 <a href="assets/gallery/regional-stocks.png"><img src="assets/gallery/regional-stocks.png" width="49%" alt="US commercial crude stocks by region, PADD 1 to 5 and Cushing, against each one's five-year range"></a>
-</p>
-
-<p>
 <a href="assets/gallery/inventory-clock.png"><img src="assets/gallery/inventory-clock.png" width="49%" alt="Inventory clock: distillate days of cover against refinery utilisation over the last twelve weeks"></a>
-<a href="assets/gallery/abnormal-weeks.png"><img src="assets/gallery/abnormal-weeks.png" width="49%" alt="Abnormal-week calendar: each weekly series against its same-week norm, as a z-score heatmap"></a>
 </p>
 
 <p>
+<a href="assets/gallery/abnormal-weeks.png"><img src="assets/gallery/abnormal-weeks.png" width="49%" alt="Abnormal-week calendar: each weekly series against its same-week norm, as a z-score heatmap"></a>
 <a href="assets/gallery/hidden-balance.png"><img src="assets/gallery/hidden-balance.png" width="49%" alt="The implied crude adjustment as a slow-moving level plus noise, filtered with a Kalman model"></a>
-<a href="assets/gallery/wti-positioning.png"><img src="assets/gallery/wti-positioning.png" width="49%" alt="Money managers' net position in NYMEX WTI futures, from the CFTC, with open interest"></a>
 </p>
 
 <details>
@@ -130,22 +141,8 @@ Figures from the report of 30 October 2026.
 
 These are built in private repositories and open once they have a record worth judging. They are here so you can see where the work is going.
 
-**Weather desk** · <sub>**private for now**</sub>
-ECMWF's open 2 m temperature forecast for the contiguous US against the 1991 to 2020 normal, drawn as a map loop on every run.
-
-<a href="assets/gallery/weather-t2ma-conus.png"><img src="assets/gallery/weather-t2ma-conus.png" width="100%" alt="Four maps of the contiguous US: the 10 November 2026 ECMWF run's 2 m temperature against the 1991 to 2020 normal at 72, 168, 264 and 360 hours ahead, warmer than normal over most of the map"></a>
-
-<sub>The 10 November 2026 ECMWF run is warmer than the 1991 to 2020 normal over the map on average: +2.5 °C at +72 h, +1.0 °C at +360 h. One deterministic run, not a skill-scored forecast. Source: ECMWF open data, IFS HRES 0.25° (CC BY 4.0), anomaly computed by me (ECMWF does not endorse it); NCEP-NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA; map data Natural Earth.</sub>
-
-**Vessel desk** · <sub>**private for now**</sub>
-Radar detections of ships in the approaches to the Strait of Hormuz from a Sentinel-1 pass, checked against AIS: where ships show on radar but not on their transponders.
-
-<a href="assets/gallery/hormuz-vessels.png"><img src="assets/gallery/hormuz-vessels.png" width="100%" alt="Sentinel-1 radar image of the Strait of Hormuz approaches with 127 ship detections: 45 with AIS presence nearby, shown as circles, and 82 without, shown as triangles"></a>
-
-<sub>One Sentinel-1 pass on 3 November 2026 gave 127 detections, 45 with AIS presence nearby and 82 without. No AIS nearby is a hypothesis to check, never evidence of intent; coastal clutter survives the masks, so read 82 as an upper bound, with about 35 to 56 plausible. Contains modified Copernicus Sentinel data 2026. AIS presence: <a href="https://globalfishingwatch.org">Powered by Global Fishing Watch</a> (CC BY-NC 4.0, non-commercial use). Coastline Natural Earth.</sub>
-
-**Also in progress, private for now**
-
+- **Weather desk:** ECMWF's open 2 m temperature forecast for the contiguous US against the 1991 to 2020 normal, drawn as a map loop on every run (map at the top).
+- **Vessel desk:** Sentinel-1 radar detections in the Strait of Hormuz approaches checked against AIS, for chokepoint flows (map at the top).
 - **Desk site:** a static research site that publishes the weather and vessel maps and the market snapshots in one place.
 - **Markets lab:** research-only scans of energy-linked perpetuals on Hyperliquid (basis, funding, liquidity) and a recorder of Polymarket energy questions. Public read data only; there is no trading code.
 - **Fuel price elasticity:** a two-page memo on how US gasoline and distillate demand responds when the pump price moves market-wide, with pre-registered tests.
