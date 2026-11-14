@@ -82,6 +82,8 @@ Pages from the public edition of the chart book I build on each EIA weekly relea
 <a href="assets/gallery/dk1-replay.png"><img src="assets/gallery/dk1-replay.png" width="56%" alt="Replay: mean absolute error of the 15-minute call by method and round"></a>
 </p>
 
+<sub>Source: Energinet, Energi Data Service; CC BY 4.0. The replay runs on estimated data vintages and is not the live record.</sub>
+
 <details>
 <summary>How each forecast is kept</summary>
 
@@ -103,6 +105,8 @@ Persistence is the forecast on the record. A LightGBM challenger is frozen and s
 <a href="assets/gallery/ie-history.png"><img src="assets/gallery/ie-history.png" width="49%" alt="Contracted capacity on Ireland's transmission grid, every list since 2015, wind and non-wind"></a>
 </p>
 
+<sub>Source: EirGrid contracted lists, Supported by EirGrid Group Data; ESB Networks DSO lists, © ESB Networks, used with their permission.</sub>
+
 <details>
 <summary>What the record shows, and where the queue sits</summary>
 
@@ -115,6 +119,8 @@ Persistence is the forecast on the record. A LightGBM challenger is frozen and s
 Figures from the report of 30 October 2026.
 
 <a href="assets/gallery/ie-map.png"><img src="assets/gallery/ie-map.png" width="70%" alt="Map of Ireland: contracted capacity waiting at each substation, against the 220 to 400 kV backbone"></a>
+
+<sub>Source: EirGrid contracted lists, Supported by EirGrid Group Data; ESB Networks DSO lists, © ESB Networks, used with their permission; lines and substations © OpenStreetMap contributors (ODbL).</sub>
 
 </details>
 
