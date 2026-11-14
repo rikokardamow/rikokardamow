@@ -73,6 +73,8 @@ Pages from the public edition of the chart book I build on each EIA weekly relea
 
 </details>
 
+<sub>Source: U.S. EIA, Weekly Petroleum Status Report, week ending 6 Nov 2026, released 12 Nov 2026; CFTC Commitments of Traders, positions of 3 Nov 2026; NOAA Climate Prediction Center, week to 12 Nov 2026. Public domain.</sub>
+
 #### Projects
 
 **[nordcast](https://github.com/rikokardamow/nordcast)** forecasts the electricity imbalance in western Denmark every quarter-hour, 15, 30 and 60 minutes ahead: which way the grid operator will have to balance, and by how many megawatts.
