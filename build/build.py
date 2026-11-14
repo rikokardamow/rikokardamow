@@ -480,8 +480,8 @@ def main():
 
     years = range(MODEL_YEARS[0], MODEL_YEARS[1] + 1)
     # Inline model: two-week bins keep the README light. File: every week.
-    inline = solid(grid(weeks, years, 2), dx=2.0, dy=2.4, kz=0.11, base=3)
-    full = solid(grid(weeks, years, 1), dx=1.0, dy=2.4, kz=0.11, base=3)
+    inline = solid(grid(weeks, years, 2), dx=6.0, dy=7.2, kz=0.33, base=9)
+    full = solid(grid(weeks, years, 1), dx=3.0, dy=7.2, kz=0.33, base=9)
     name = f"us_crude_stocks_{MODEL_YEARS[0]}_{MODEL_YEARS[1]}"
     (ASSETS / "us-crude-stocks.stl").write_bytes(
         binary_stl(full, f"US crude stocks ex SPR, EIA {SERIES}, weekly {MODEL_YEARS[0]}-{MODEL_YEARS[1]}")
