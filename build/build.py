@@ -37,31 +37,49 @@ SERIES = "WCESTUS1"
 
 MINUS = "−"
 
-# Kardamow house style (energy-forecasting house_style.TOKENS), with dark steps
-# chosen for GitHub's dark page. No red or green; text never wears a series colour.
+# The paper look shared with the other repositories (paper_style: ggplot2's
+# theme_minimal, newsroom style): grey sans-serif text, no box, a light baseline, a
+# faint horizontal grid behind the data, 1.2 pt lines, haloed direct labels and no
+# title on the image (the finding is the caption under it in README.md). Light is the
+# look as specified; dark is the same layout with text, grid and baseline inverted
+# for GitHub's dark page, every text at least 4.5:1 on it. No red or green. Last year
+# is a clearly darker (light) or lighter (dark) grey than the average, so the two end
+# labels, which can sit close together, still match their lines by colour.
 THEMES = {
     "light": {
         "page": "#FFFFFF",
-        "text": "#0B1F3A",
-        "muted": "#5B6878",
-        "grid": "#DCE3EC",
-        "band": "#E6ECF4",
-        "average": "#93A5BB",
-        "last_year": "#5B6878",
-        "current": "#1F5FBF",
+        "text": "#333333",
+        "tick": "#4D4D4D",
+        "muted": "#808080",
+        "grid": "#E5E5E5",
+        "baseline": "#B3B3B3",
+        "band": "#7D8996",
+        "average": "#808080",
+        "last_year": "#4D4D4D",
+        "current": "#0F2A4A",
     },
     "dark": {
         "page": "#0D1117",
-        "text": "#E6EDF3",
-        "muted": "#9198A1",
-        "grid": "#262C36",
-        "band": "#17243A",
-        "average": "#4A6489",
-        "last_year": "#8B949E",
-        "current": "#6CA0F0",
+        "text": "#CCCCCC",
+        "tick": "#B3B3B3",
+        "muted": "#8C8C8C",
+        "grid": "#2B2B2B",
+        "baseline": "#4D4D4D",
+        "band": "#7D8996",
+        "average": "#8C8C8C",
+        "last_year": "#B3B3B3",
+        "current": "#9CC0F5",
     },
 }
-FONT = "Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif"
+FONT = "'Helvetica Neue', Helvetica, Arial, 'DejaVu Sans', sans-serif"
+
+# Printed size, as in paper_style: 7.0 by 4.2 in, drawn in points (72 to the inch), so
+# 8 pt type is 8 pt on the page. Margins in inches as paper_style.frame() sets them.
+PT = 72
+WIDTH_IN, HEIGHT_IN = 7.0, 4.2
+MARGIN_IN = {"left": 0.6, "top": 0.2, "bottom": 0.5, "right": min(0.18 * WIDTH_IN, 1.3)}
+LINE = 1.2  # data lines, pt
+HALO = 2.5  # page-coloured stroke behind direct labels, pt
 
 
 # ---------------------------------------------------------------- data
@@ -196,8 +214,9 @@ def dodge(labels, gap=15, top=0, bottom=10_000):
 
 def chart(s, weeks, theme):
     c = THEMES[theme]
-    W, H = 880, 448
-    x0, x1, y0, y1 = 64, 716, 104, 356
+    W, H = WIDTH_IN * PT, HEIGHT_IN * PT
+    x0, x1 = MARGIN_IN["left"] * PT, W - MARGIN_IN["right"] * PT
+    y0, y1 = MARGIN_IN["top"] * PT, H - MARGIN_IN["bottom"] * PT
     year, last = s["year"], s["year"] - 1
     span = range(s["first"], s["last"] + 1)
 
@@ -222,8 +241,8 @@ def chart(s, weeks, theme):
 
     out = [
         (
-            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" '
-            f'role="img" aria-labelledby="t d">'
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:g} {H:g}" width="{WIDTH_IN:g}in" '
+            f'height="{HEIGHT_IN:g}in" role="img" aria-labelledby="t d">'
         ),
         f'<title id="t">{esc(headline(s))}</title>',
         (
@@ -232,80 +251,100 @@ def chart(s, weeks, theme):
             f"{s['value']:.1f} mb, {where_in_range(s)}.</desc>"
         ),
         "<style>",
-        f"text{{font-family:{FONT};font-variant-numeric:tabular-nums;fill:{c['muted']}}}",
-        f".title{{font-size:20px;font-weight:600;fill:{c['text']};letter-spacing:-.01em}}",
-        ".sub{font-size:13px}",
-        ".tick{font-size:11.5px}",
-        ".lab{font-size:12px}",
-        f".strong{{font-weight:600;fill:{c['text']}}}",
-        ".foot{font-size:11px}",
+        f"text{{font-family:{FONT};font-variant-numeric:tabular-nums;fill:{c['text']}}}",
+        f".tick{{font-size:7px;fill:{c['tick']}}}",
+        ".axis{font-size:8px}",
+        ".lab{font-size:7.5px}",
+        f".note{{font-size:7px;fill:{c['muted']}}}",
+        f".halo{{paint-order:stroke;stroke:{c['page']};stroke-width:{HALO}px;stroke-linejoin:round}}",
         "</style>",
-        f'<text class="title" x="24" y="40">{esc(headline(s))}</text>',
-        (
-            f'<text class="sub" x="24" y="64">mb, weekly, excluding the Strategic Petroleum Reserve. '
-            f"Latest: week ending {day(s['date'])}.</text>"
-        ),
     ]
 
+    # Faint horizontal grid behind the data; the bottom one is the baseline instead.
     for v in range(int(vmin), int(vmax) + 1, step):
-        out.append(f'<line x1="{x0}" x2="{x1}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="{c["grid"]}" stroke-width="1"/>')
-        out.append(f'<text class="tick" x="{x0 - 10}" y="{Y(v) + 4:.1f}" text-anchor="end">{v}</text>')
-    for m in range(1, 13):
-        mid = date(year, m, 15).timetuple().tm_yday / 7 + 0.5
-        out.append(
-            f'<text class="tick" x="{X(mid):.1f}" y="{y1 + 22}" text-anchor="middle">{date(year, m, 1):%b}</text>'
-        )
+        if v > vmin:
+            out.append(
+                f'<line x1="{x0:.1f}" x2="{x1:.1f}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" '
+                f'stroke="{c["grid"]}" stroke-width="0.5"/>'
+            )
+        out.append(f'<text class="tick" x="{x0 - 4:.1f}" y="{Y(v) + 2.5:.1f}" text-anchor="end">{v}</text>')
 
     upper = [(X(w), Y(hi)) for w, _, hi, _ in band]
     lower = [(X(w), Y(lo)) for w, lo, _, _ in reversed(band)]
-    out.append(f'<path d="{path(upper + lower)} Z" fill="{c["band"]}"/>')
+    out.append(f'<path d="{path(upper + lower)} Z" fill="{c["band"]}" fill-opacity="0.22"/>')
     out.append(
-        f'<path d="{path([(X(w), Y(a)) for w, _, _, a in band])}" fill="none" stroke="{c["average"]}" stroke-width="1.5"/>'
+        f'<path d="{path([(X(w), Y(a)) for w, _, _, a in band])}" fill="none" stroke="{c["average"]}" '
+        f'stroke-width="0.8" stroke-dasharray="1.2 1.8"/>'
     )
     out.append(
         f'<path d="{path([(X(w), Y(v)) for w, v in prior])}" fill="none" stroke="{c["last_year"]}" '
-        f'stroke-width="1.4" stroke-linejoin="round"/>'
+        f'stroke-width="{LINE}" stroke-dasharray="6 2.4" stroke-linejoin="round"/>'
     )
     out.append(
         f'<path d="{path([(X(w), Y(v)) for w, v in this])}" fill="none" '
-        f'stroke="{c["current"]}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>'
+        f'stroke="{c["current"]}" stroke-width="{LINE}" stroke-linejoin="round" stroke-linecap="round"/>'
     )
 
-    # The latest print: a dot at the end of the line, its value and year beneath.
-    dx, dy = X(this[-1][0]), Y(this[-1][1])
-    below = s["value"] < s["avg"]
-    ly = dy + 30 if below else dy - 26
-    out.append(f'<circle cx="{dx:.1f}" cy="{dy:.1f}" r="4.5" fill="{c["current"]}"/>')
-    out.append(f'<text class="lab strong" x="{dx:.1f}" y="{ly:.1f}" text-anchor="middle">{s["value"]:.1f}</text>')
-    out.append(f'<text class="lab" x="{dx:.1f}" y="{ly + 15:.1f}" text-anchor="middle">{year}</text>')
+    # The baseline, with short ticks at the start of each month and the month names between.
+    out.append(
+        f'<line x1="{x0:.1f}" x2="{x1:.1f}" y1="{y1:.1f}" y2="{y1:.1f}" stroke="{c["baseline"]}" stroke-width="0.6"/>'
+    )
+    for m in range(1, 13):
+        start = date(year, m, 1).timetuple().tm_yday / 7 + 0.5
+        mid = date(year, m, 15).timetuple().tm_yday / 7 + 0.5
+        if X(1) <= X(start) <= X(52):
+            out.append(
+                f'<line x1="{X(start):.1f}" x2="{X(start):.1f}" y1="{y1:.1f}" y2="{y1 + 3:.1f}" '
+                f'stroke="{c["baseline"]}" stroke-width="0.6"/>'
+            )
+        out.append(
+            f'<text class="tick" x="{X(mid):.1f}" y="{y1 + 11:.1f}" text-anchor="middle">{date(year, m, 1):%b}</text>'
+        )
+
+    # Axis labels name the quantity and its unit.
+    out.append(
+        f'<text class="axis" x="{(x0 + x1) / 2:.1f}" y="{H - 9:.1f}" text-anchor="middle">'
+        f"Week of the year, labelled by month (ISO weeks)</text>"
+    )
+    out.append(
+        f'<text class="axis" transform="translate(12,{(y0 + y1) / 2:.1f}) rotate(-90)" text-anchor="middle">'
+        f"Commercial crude stocks (mb)</text>"
+    )
 
     # The range is named inside the band, where it is widest in the first half of the year.
     bw, _, bhi, _ = max(band[2:26], key=lambda b: b[2] - b[1])
     out.append(
-        f'<text class="lab" x="{X(bw):.1f}" y="{Y(bhi) + 20:.1f}" text-anchor="middle">{s["first"]} to {s["last"]} range</text>'
+        f'<text class="note halo" x="{X(bw):.1f}" y="{Y(bhi) + 13:.1f}" text-anchor="middle">'
+        f"{s['first']} to {s['last']} range</text>"
+    )
+
+    # The latest print: a dot at the end of the line, labelled directly on the side away
+    # from the average and clear of the line's last weeks, inside the panel and the end labels.
+    dx, dy = X(this[-1][0]), Y(this[-1][1])
+    near = [Y(v) for _, v in this[-5:]]  # the line under and beside the label
+    ly = max(near) + 10 if s["value"] < s["avg"] else min(near) - 5
+    out.append(f'<circle cx="{dx:.1f}" cy="{dy:.1f}" r="1.75" fill="{c["current"]}"/>')
+    out.append(
+        f'<text class="lab halo" x="{dx:.1f}" y="{ly:.1f}" text-anchor="middle" '
+        f'style="fill:{c["current"]}">{year} · {s["value"]:.1f} mb</text>'
     )
 
     # End labels at the right edge, nudged apart; none is a legend box.
     _w_end, _lo_end, _hi_end, avg_end = band[-1]
     ends = dodge(
         [
-            {"y": Y(prior[-1][1]), "text": str(last), "cls": "lab strong"},
-            {"y": Y(avg_end), "text": "Five-year average", "cls": "lab"},
+            {"y": Y(prior[-1][1]), "text": str(last), "colour": c["last_year"]},
+            {"y": Y(avg_end), "text": "Five-year average", "colour": c["muted"]},
         ],
+        gap=9,
         top=y0,
         bottom=y1,
     )
     for lab in ends:
-        out.append(f'<text class="{lab["cls"]}" x="{x1 + 12}" y="{lab["y"] + 4:.1f}">{esc(lab["text"])}</text>')
-
-    out.append(
-        f'<text class="foot" x="24" y="{H - 34}">Source: US Energy Information Administration, Weekly Petroleum '
-        f"Status Report, series {SERIES}. Public domain.</text>"
-    )
-    out.append(
-        f'<text class="foot" x="24" y="{H - 16}">Range and average over {s["first"]} to {s["last"]}, '
-        f"by ISO week. Drawn by build/build.py in github.com/rikokardamow/rikokardamow.</text>"
-    )
+        out.append(
+            f'<text class="lab halo" x="{x1 + 6:.1f}" y="{lab["y"] + 2.6:.1f}" '
+            f'style="fill:{lab["colour"]}">{esc(lab["text"])}</text>'
+        )
     out.append("</svg>")
     return "\n".join(out) + "\n"
 
@@ -376,7 +415,17 @@ def picture(s):
         "<picture>\n"
         '  <source media="(prefers-color-scheme: dark)" srcset="assets/stocks-dark.svg">\n'
         f'  <img alt="{esc(alt)}" src="assets/stocks-light.svg" width="100%">\n'
-        "</picture>"
+        "</picture>\n\n" + caption(s)
+    )
+
+
+def caption(s):
+    """What paper_style puts in <name>.tex: the finding, then units and source, never on the image."""
+    return (
+        f"*Figure: {headline(s)}. Stocks by ISO week excluding the Strategic Petroleum Reserve: "
+        f"{s['year']} so far (solid), {s['year'] - 1} (dashed), and the {s['first']} to {s['last']} range "
+        f"(shaded) and average (dotted). Units: mb; weekly. Source: US Energy Information Administration, Weekly Petroleum Status "
+        f"Report, series {SERIES}; public domain; as of {s['date'].isoformat()}.*"
     )
 
 

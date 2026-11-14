@@ -18,6 +18,8 @@ I came to this from finance and data work, where much of the job was cleaning nu
   <source media="(prefers-color-scheme: dark)" srcset="assets/stocks-dark.svg">
   <img alt="US commercial crude stocks are 19 mb below the five-year average: 414.4 mb in the week ending 6 Nov 2026, under the whole 2021 to 2025 range for the week." src="assets/stocks-light.svg" width="100%">
 </picture>
+
+*Figure: US commercial crude stocks are 19 mb below the five-year average. Stocks by ISO week excluding the Strategic Petroleum Reserve: 2026 so far (solid), 2025 (dashed), and the 2021 to 2025 range (shaded) and average (dotted). Units: mb; weekly. Source: US Energy Information Administration, Weekly Petroleum Status Report, series WCESTUS1; public domain; as of 2026-11-06.*
 <!-- /stocks:chart -->
 
 <details>
@@ -71,6 +73,8 @@ Pages from the public edition of the chart book I build on each EIA weekly relea
 
 </details>
 
+<sub>Source: U.S. EIA, Weekly Petroleum Status Report, week ending 6 Nov 2026, released 12 Nov 2026; CFTC Commitments of Traders, positions of 3 Nov 2026; NOAA Climate Prediction Center, week to 12 Nov 2026. Public domain.</sub>
+
 #### Projects
 
 **[nordcast](https://github.com/rikokardamow/nordcast)** forecasts the electricity imbalance in western Denmark every quarter-hour, 15, 30 and 60 minutes ahead: which way the grid operator will have to balance, and by how many megawatts.
@@ -79,6 +83,8 @@ Pages from the public edition of the chart book I build on each EIA weekly relea
 <a href="assets/gallery/dk1-imbalance.png"><img src="assets/gallery/dk1-imbalance.png" width="42%" alt="DK1 system imbalance and wind forecast error, one week, quarter-hourly"></a>
 <a href="assets/gallery/dk1-replay.png"><img src="assets/gallery/dk1-replay.png" width="56%" alt="Replay: mean absolute error of the 15-minute call by method and round"></a>
 </p>
+
+<sub>Source: Energinet, Energi Data Service; CC BY 4.0. The replay runs on estimated data vintages and is not the live record.</sub>
 
 <details>
 <summary>How each forecast is kept</summary>
@@ -101,6 +107,8 @@ Persistence is the forecast on the record. A LightGBM challenger is frozen and s
 <a href="assets/gallery/ie-history.png"><img src="assets/gallery/ie-history.png" width="49%" alt="Contracted capacity on Ireland's transmission grid, every list since 2015, wind and non-wind"></a>
 </p>
 
+<sub>Source: EirGrid contracted lists, Supported by EirGrid Group Data; ESB Networks DSO lists, © ESB Networks, used with their permission.</sub>
+
 <details>
 <summary>What the record shows, and where the queue sits</summary>
 
@@ -113,6 +121,8 @@ Persistence is the forecast on the record. A LightGBM challenger is frozen and s
 Figures from the report of 30 October 2026.
 
 <a href="assets/gallery/ie-map.png"><img src="assets/gallery/ie-map.png" width="70%" alt="Map of Ireland: contracted capacity waiting at each substation, against the 220 to 400 kV backbone"></a>
+
+<sub>Source: EirGrid contracted lists, Supported by EirGrid Group Data; ESB Networks DSO lists, © ESB Networks, used with their permission; lines and substations © OpenStreetMap contributors (ODbL).</sub>
 
 </details>
 
