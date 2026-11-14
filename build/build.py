@@ -314,7 +314,7 @@ def chart(s, weeks, theme):
 
 
 def grid(weeks, years, bin_weeks):
-    """Mean stocks (mb) per bin of weeks, one row per year; gaps filled from neighbours."""
+    """Mean stocks (mb): one row per bin of weeks, one column per year; gaps filled from neighbours."""
     rows = []
     for y in years:
         row = []
@@ -326,13 +326,13 @@ def grid(weeks, years, bin_weeks):
                 near = [u for u in row[max(0, j - 1) : j + 2] if u is not None]
                 row[j] = sum(near) / len(near)
         rows.append(row)
-    return rows
+    return [list(col) for col in zip(*rows, strict=True)]
 
 
 def solid(rows, dx, dy, kz, base):
     """Closed triangle mesh: a surface over the grid, four walls and a floor.
 
-    x runs along the weeks, y along the years, z up. Every facet is wound so its
+    Columns run along x and rows along y, z up. Every facet is wound so its
     normal points out of the solid.
     """
     ny, nx = len(rows), len(rows[0])
@@ -479,9 +479,10 @@ def main():
         (ASSETS / f"stocks-{theme}.svg").write_text(chart(s, weeks, theme))
 
     years = range(MODEL_YEARS[0], MODEL_YEARS[1] + 1)
-    # Inline model: two-week bins keep the README light. File: every week.
-    inline = solid(grid(weeks, years, 2), dx=6.0, dy=7.2, kz=0.33, base=9)
-    full = solid(grid(weeks, years, 1), dx=3.0, dy=7.2, kz=0.33, base=9)
+    # Years run along x, so the face towards GitHub's camera reads as a time series;
+    # weeks run along y. Inline: two-week bins keep the README light. File: every week.
+    inline = solid(grid(weeks, years, 2), dx=6.4, dy=60 / 25, kz=0.12, base=4)
+    full = solid(grid(weeks, years, 1), dx=6.4, dy=60 / 51, kz=0.12, base=4)
     name = f"us_crude_stocks_{MODEL_YEARS[0]}_{MODEL_YEARS[1]}"
     (ASSETS / "us-crude-stocks.stl").write_bytes(
         binary_stl(full, f"US crude stocks ex SPR, EIA {SERIES}, weekly {MODEL_YEARS[0]}-{MODEL_YEARS[1]}")
