@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 448" width="880" height="448" role="img" aria-labelledby="t d">
+<title id="t">US commercial crude stocks are 19 mb below the five-year average</title>
+<desc id="d">US commercial crude stocks by week of the year: 2026 so far, 2025, and the 2021 to 2025 range and average. Week ending 6 Nov 2026: 414.4 mb, under the whole 2021 to 2025 range for the week.</desc>
+<style>
+text{font-family:Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;font-variant-numeric:tabular-nums;fill:#9198A1}
+.title{font-size:20px;font-weight:600;fill:#E6EDF3;letter-spacing:-.01em}
+.sub{font-size:13px}
+.tick{font-size:11.5px}
+.lab{font-size:12px}
+.strong{font-weight:600;fill:#E6EDF3}
+.foot{font-size:11px}
+</style>
+<text class="title" x="24" y="40">US commercial crude stocks are 19 mb below the five-year average</text>
+<text class="sub" x="24" y="64">mb, weekly, excluding the Strategic Petroleum Reserve. Latest: week ending 6 Nov 2026.</text>
+<line x1="64" x2="716" y1="356.0" y2="356.0" stroke="#262C36" stroke-width="1"/>
+<text class="tick" x="54" y="360.0" text-anchor="end">375</text>
+<line x1="64" x2="716" y1="314.0" y2="314.0" stroke="#262C36" stroke-width="1"/>
+<text class="tick" x="54" y="318.0" text-anchor="end">400</text>
+<line x1="64" x2="716" y1="272.0" y2="272.0" stroke="#262C36" stroke-width="1"/>
+<text class="tick" x="54" y="276.0" text-anchor="end">425</text>
+<line x1="64" x2="716" y1="230.0" y2="230.0" stroke="#262C36" stroke-width="1"/>
+<text class="tick" x="54" y="234.0" text-anchor="end">450</text>
+<line x1="64" x2="716" y1="188.0" y2="188.0" stroke="#262C36" stroke-width="1"/>
+<text class="tick" x="54" y="192.0" text-anchor="end">475</text>
+<line x1="64" x2="716" y1="146.0" y2="146.0" stroke="#262C36" stroke-width="1"/>
+<text class="tick" x="54" y="150.0" text-anchor="end">500</text>
+<line x1="64" x2="716" y1="104.0" y2="104.0" stroke="#262C36" stroke-width="1"/>
+<text class="tick" x="54" y="108.0" text-anchor="end">525</text>
+<text class="tick" x="85.0" y="378" text-anchor="middle">Jan</text>
+<text class="tick" x="141.6" y="378" text-anchor="middle">Feb</text>
+<text class="tick" x="192.8" y="378" text-anchor="middle">Mar</text>
+<text class="tick" x="249.4" y="378" text-anchor="middle">Apr</text>
+<text class="tick" x="304.2" y="378" text-anchor="middle">May</text>
+<text class="tick" x="360.8" y="378" text-anchor="middle">Jun</text>
+<text class="tick" x="415.6" y="378" text-anchor="middle">Jul</text>
+<text class="tick" x="472.2" y="378" text-anchor="middle">Aug</text>
+<text class="tick" x="528.8" y="378" text-anchor="middle">Sep</text>
+<text class="tick" x="583.6" y="378" text-anchor="middle">Oct</text>
+<text class="tick" x="640.2" y="378" text-anchor="middle">Nov</text>
+<text class="tick" x="695.0" y="378" text-anchor="middle">Dec</text>
+<path d="M64.0,175.9 L76.8,168.6 L89.6,185.2 L102.4,186.9 L115.1,198.1 L127.9,194.1 L140.7,181.2 L153.5,171.9 L166.3,148.7 L179.1,144.7 L191.8,141.4 L204.6,142.9 L217.4,148.8 L230.2,158.7 L243.0,157.7 L255.8,157.6 L268.5,171.0 L281.3,171.7 L294.1,169.5 L306.9,172.3 L319.7,180.8 L332.5,189.6 L345.3,201.2 L358.0,207.7 L370.8,212.0 L383.6,226.3 L396.4,216.3 L409.2,217.5 L422.0,218.5 L434.7,247.2 L447.5,237.4 L460.3,247.4 L473.1,257.7 L485.9,271.3 L498.7,268.3 L511.5,264.2 L524.2,262.3 L537.0,262.7 L549.8,264.9 L562.6,248.3 L575.4,251.2 L588.2,246.9 L600.9,252.1 L613.7,245.5 L626.5,247.9 L639.3,233.3 L652.1,230.6 L664.9,238.3 L677.6,245.5 L690.4,240.6 L703.2,252.6 L716.0,261.8 L716.0,287.8 L703.2,285.8 L690.4,283.4 L677.6,277.1 L664.9,290.7 L652.1,281.9 L639.3,273.4 L626.5,267.7 L613.7,278.4 L600.9,287.2 L588.2,278.5 L575.4,280.8 L562.6,280.0 L549.8,290.4 L537.0,292.1 L524.2,290.5 L511.5,284.7 L498.7,286.0 L485.9,283.3 L473.1,279.3 L460.3,272.1 L447.5,274.2 L434.7,269.4 L422.0,282.1 L409.2,276.8 L396.4,270.3 L383.6,282.2 L370.8,288.6 L358.0,283.2 L345.3,282.6 L332.5,285.8 L319.7,289.2 L306.9,280.7 L294.1,279.0 L281.3,273.3 L268.5,287.6 L255.8,289.8 L243.0,290.9 L230.2,277.5 L217.4,293.2 L204.6,297.3 L191.8,291.5 L179.1,287.3 L166.3,294.6 L153.5,291.4 L140.7,287.1 L127.9,294.7 L115.1,296.5 L102.4,288.6 L89.6,294.4 L76.8,292.7 L64.0,291.7 Z" fill="#17243A"/>
+<path d="M64.0,252.8 L76.8,249.8 L89.6,255.6 L102.4,253.3 L115.1,251.6 L127.9,242.8 L140.7,235.5 L153.5,228.1 L166.3,223.0 L179.1,220.3 L191.8,220.2 L204.6,224.2 L217.4,222.7 L230.2,218.5 L243.0,221.4 L255.8,224.9 L268.5,226.0 L281.3,223.5 L294.1,222.2 L306.9,226.2 L319.7,230.4 L332.5,232.7 L345.3,231.8 L358.0,240.5 L370.8,247.7 L383.6,250.5 L396.4,248.9 L409.2,251.5 L422.0,256.9 L434.7,258.5 L447.5,257.1 L460.3,261.1 L473.1,268.8 L485.9,277.0 L498.7,278.1 L511.5,276.5 L524.2,281.7 L537.0,282.7 L549.8,281.2 L562.6,269.2 L575.4,271.0 L588.2,266.7 L600.9,268.9 L613.7,260.1 L626.5,258.5 L639.3,257.5 L652.1,261.2 L664.9,266.1 L677.6,266.7 L690.4,270.0 L703.2,274.6 L716.0,277.7" fill="none" stroke="#4A6489" stroke-width="1.5"/>
+<path d="M64.0,289.4 L76.8,292.7 L89.6,294.4 L102.4,288.6 L115.1,274.0 L127.9,267.2 L140.7,259.4 L153.5,263.3 L166.3,257.3 L179.1,254.8 L191.8,251.9 L204.6,257.5 L217.4,247.1 L230.2,242.9 L243.0,242.0 L255.8,241.6 L268.5,246.1 L281.3,249.5 L294.1,243.7 L306.9,241.5 L319.7,246.2 L332.5,253.4 L345.3,259.5 L358.0,278.8 L370.8,288.6 L383.6,282.2 L396.4,270.3 L409.2,276.8 L422.0,282.1 L434.7,269.2 L447.5,274.2 L460.3,269.1 L473.1,279.3 L485.9,283.3 L498.7,279.2 L511.5,272.6 L524.2,288.2 L537.0,289.2 L549.8,286.2 L562.6,280.0 L575.4,274.0 L588.2,275.7 L600.9,287.2 L613.7,278.4 L626.5,267.7 L639.3,273.4 L652.1,268.8 L664.9,267.8 L677.6,270.8 L690.4,273.0 L703.2,272.3 L716.0,275.5" fill="none" stroke="#8B949E" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M64.0,282.0 L76.8,276.3 L89.6,270.2 L102.4,274.1 L115.1,279.9 L127.9,265.6 L140.7,280.7 L153.5,253.8 L166.3,248.0 L179.1,241.6 L191.8,231.2 L204.6,219.6 L217.4,210.5 L230.2,205.3 L243.0,206.8 L255.8,203.6 L268.5,214.0 L281.3,217.9 L294.1,225.2 L306.9,238.4 L319.7,244.0 L332.5,257.4 L345.3,269.5 L358.0,283.4 L370.8,293.6 L383.6,300.0 L396.4,294.9 L409.2,297.8 L422.0,294.4 L434.7,306.4 L447.5,302.3 L460.3,273.0 L473.1,265.6 L485.9,265.4 L498.7,272.9 L511.5,273.6 L524.2,274.6 L537.0,269.7 L549.8,268.1 L562.6,273.5 L575.4,287.8 L588.2,293.0 L600.9,296.1 L613.7,297.6 L626.5,289.8" fill="none" stroke="#6CA0F0" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="626.5" cy="289.8" r="4.5" fill="#6CA0F0"/>
+<text class="lab strong" x="626.5" y="319.8" text-anchor="middle">414.4</text>
+<text class="lab" x="626.5" y="334.8" text-anchor="middle">2026</text>
+<text class="lab" x="204.6" y="162.9" text-anchor="middle">2021 to 2025 range</text>
+<text class="lab strong" x="728" y="279.5">2025</text>
+<text class="lab" x="728" y="294.5">Five-year average</text>
+<text class="foot" x="24" y="414">Source: US Energy Information Administration, Weekly Petroleum Status Report, series WCESTUS1. Public domain.</text>
+<text class="foot" x="24" y="432">Range and average over 2021 to 2025, by ISO week. Drawn by build/build.py in github.com/rikokardamow/rikokardamow.</text>
+</svg>
