@@ -126,137 +126,30 @@ Figures from the report of 30 October 2026.
 
 </details>
 
-#### Where the work is
+#### In progress, private for now
 
-Click a point or a line to see what it is.
+These are built in private repositories and open once they have a record worth judging. They are here so you can see where the work is going.
 
-```geojson
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "Project": "nordcast",
-        "Forecasts": "DK1 power imbalance",
-        "How often": "Every quarter-hour",
-        "Horizons": "15, 30 and 60 minutes",
-        "Scored on": "Energinet's first figure",
-        "Since": "28 October 2026"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [9.74, 55.56]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Project": "ie-grid-pipeline",
-        "Records": "Ireland's grid connection queue",
-        "Lists kept": "EirGrid and ESB Networks",
-        "Since": "2015",
-        "Waiting": "16.57 GW, at 30 October 2026"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-6.23, 53.33]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Project": "US crude stocks record",
-        "Forecasts": "Weekly change in crude stocks",
-        "Frozen": "Before each EIA release",
-        "Why Cushing": "Delivery point for WTI",
-        "Status": "Private until enough weeks"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-96.77, 35.99]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Project": "US gas storage record",
-        "Status": "Next, built the same way",
-        "Why Henry Hub": "Delivery point for NYMEX gas"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-92.04, 29.96]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Interconnector": "East West (EWIC)",
-        "Links": "Co. Meath to Deeside, Wales",
-        "Capacity": "500 MW, in service",
-        "Line": "Straight, not the cable route"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-6.53, 53.47],
-          [-3.06, 53.23]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Interconnector": "Moyle",
-        "Links": "Co. Antrim to Ayrshire",
-        "Capacity": "500 MW, in service",
-        "Line": "Straight, not the cable route"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-5.77, 54.83],
-          [-4.95, 55.07]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Interconnector": "Greenlink",
-        "Links": "Co. Wexford to Pembroke, Wales",
-        "Capacity": "500 MW, in service since 2025",
-        "Line": "Straight, not the cable route"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-6.98, 52.35],
-          [-4.99, 51.68]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Interconnector": "Celtic",
-        "Links": "East Cork to Brittany",
-        "Capacity": "700 MW, being built",
-        "Due": "Q4 2028, per EirGrid",
-        "Line": "Straight, not the cable route"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-8.25, 51.93],
-          [-4.16, 48.45]
-        ]
-      }
-    }
-  ]
-}
-```
+**Weather desk** · <sub>**private for now**</sub>
+ECMWF's open 2 m temperature forecast for the contiguous US against the 1991 to 2020 normal, drawn as a map loop on every run.
+
+<a href="assets/gallery/weather-t2ma-conus.png"><img src="assets/gallery/weather-t2ma-conus.png" width="100%" alt="Four maps of the contiguous US: the 10 November 2026 ECMWF run's 2 m temperature against the 1991 to 2020 normal at 72, 168, 264 and 360 hours ahead, warmer than normal over most of the map"></a>
+
+<sub>The 10 November 2026 ECMWF run is warmer than the 1991 to 2020 normal over the map on average: +2.5 °C at +72 h, +1.0 °C at +360 h. One deterministic run, not a skill-scored forecast. Source: ECMWF open data, IFS HRES 0.25° (CC BY 4.0), anomaly computed by me (ECMWF does not endorse it); NCEP-NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA; map data Natural Earth.</sub>
+
+**Vessel desk** · <sub>**private for now**</sub>
+Radar detections of ships in the approaches to the Strait of Hormuz from a Sentinel-1 pass, checked against AIS: where ships show on radar but not on their transponders.
+
+<a href="assets/gallery/hormuz-vessels.png"><img src="assets/gallery/hormuz-vessels.png" width="100%" alt="Sentinel-1 radar image of the Strait of Hormuz approaches with 127 ship detections: 45 with AIS presence nearby, shown as circles, and 82 without, shown as triangles"></a>
+
+<sub>One Sentinel-1 pass on 3 November 2026 gave 127 detections, 45 with AIS presence nearby and 82 without. No AIS nearby is a hypothesis to check, never evidence of intent; coastal clutter survives the masks, so read 82 as an upper bound, with about 35 to 56 plausible. Contains modified Copernicus Sentinel data 2026. AIS presence: <a href="https://globalfishingwatch.org">Powered by Global Fishing Watch</a> (CC BY-NC 4.0, non-commercial use). Coastline Natural Earth.</sub>
+
+**Also in progress, private for now**
+
+- **Desk site:** a static research site that publishes the weather and vessel maps and the market snapshots in one place.
+- **Markets lab:** research-only scans of energy-linked perpetuals on Hyperliquid (basis, funding, liquidity) and a recorder of Polymarket energy questions. Public read data only; there is no trading code.
+- **Fuel price elasticity:** a two-page memo on how US gasoline and distillate demand responds when the pump price moves market-wide, with pre-registered tests.
+- **US gas storage record:** next, built the same way as the crude record above.
 
 #### What I keep coming back to
 
@@ -264,7 +157,7 @@ Click a point or a line to see what it is.
 - Sanctions, and the gap between when a policy is announced and when barrels actually move
 - Pipelines, terminals and refineries as the real limit on how fast anything changes
 
-**Tools:** Python, SQL, DuckDB, Postgres, pandas, matplotlib, Next.js. Public data from the EIA, Energinet, EirGrid, GIE, ENTSO-E and the CFTC.
+**Tools:** Python, SQL, DuckDB, Postgres, pandas, matplotlib, plotnine, Next.js. Public data from the EIA, Energinet, EirGrid, GIE, ENTSO-E and the CFTC.
 
 **Find me** at [kardamow.com](https://kardamow.com) and [@kardamow on X](https://x.com/kardamow).
 
