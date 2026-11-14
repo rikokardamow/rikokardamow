@@ -1,13 +1,15 @@
-"""Draw the profile's crude stocks chart and 3D model from EIA weekly data.
+"""Draw the profile's crude stocks chart from EIA weekly data, and refresh the gallery.
 
 Run from anywhere after a Weekly Petroleum Status Report:
 
-    EIA_API_KEY=... python3 build/build.py
+    EIA_API_KEY=... python3 build/build.py             # the stocks chart and its table
+    EIA_API_KEY=... python3 build/build.py --gallery   # also copy the gallery charts in
 
 Without a key it rebuilds from the cached CSV in build/data/. It writes
-assets/stocks-light.svg, assets/stocks-dark.svg and assets/us-crude-stocks.stl,
-and rewrites the blocks between <!-- name --> and <!-- /name --> in README.md.
-Standard library only, so it runs on any Python 3.10 or later.
+assets/stocks-light.svg and assets/stocks-dark.svg, and rewrites the blocks between
+<!-- name --> and <!-- /name --> in README.md. The gallery charts are drawn in the
+other repositories (see GALLERY); --gallery copies the current ones into
+assets/gallery/. Standard library only, so it runs on any Python 3.10 or later.
 
 Data: EIA series WCESTUS1, US ending stocks of crude oil excluding the SPR,
 thousand barrels, weekly. Public domain.
@@ -19,7 +21,7 @@ import json
 import math
 import os
 import re
-import struct
+import shutil
 import sys
 import urllib.parse
 import urllib.request
@@ -33,8 +35,6 @@ README = ROOT / "README.md"
 URL = "https://api.eia.gov/v2/petroleum/stoc/wstk/data/"
 SERIES = "WCESTUS1"
 
-MODEL_YEARS = (2010, 2025)  # full years only, so the model is a closed solid
-MODEL_FLOOR = 250  # mb; height in the model is stocks above this
 MINUS = "−"
 
 # Kardamow house style (energy-forecasting house_style.TOKENS), with dark steps
@@ -310,110 +310,54 @@ def chart(s, weeks, theme):
     return "\n".join(out) + "\n"
 
 
-# ---------------------------------------------------------------- model
+# ---------------------------------------------------------------- gallery
+
+# Each gallery chart, where it is drawn, and its data licence. The private
+# energy-forecasting charts are copied from disk; the public repos from GitHub.
+EF = Path(os.environ.get("ENERGY_FORECASTING", Path.home() / "energy-forecasting"))
+REF = EF / "docs" / "chartbook" / "reference"
+RAW = "https://raw.githubusercontent.com/rikokardamow"
+GALLERY = {
+    "balance-waterfall.png": (REF / "A32_weekly_balance_waterfall.png", "EIA, public domain"),
+    "regional-stocks.png": (REF / "A08_padd_cushing_small_multiples.png", "EIA, public domain"),
+    "inventory-clock.png": ("chartbook:E5", "EIA, public domain"),
+    "abnormal-weeks.png": ("chartbook:E6", "EIA, public domain"),
+    "hidden-balance.png": ("chartbook:E7", "EIA, public domain"),
+    "wti-positioning.png": (REF / "A17_wti_positioning_public.png", "CFTC, public domain"),
+    "cushing.png": (REF / "A44_cushing_vs_recent_low.png", "EIA, public domain"),
+    "heating-degree-days.png": (REF / "A45_hdd_anomaly_map.png", "NOAA, public domain"),
+    "dk1-imbalance.png": (f"{RAW}/nordcast/main/notebooks/01_look.png", "Energinet, CC BY 4.0"),
+    "dk1-replay.png": (f"{RAW}/nordcast/main/replay/mae_by_round.png", "Energinet, CC BY 4.0"),
+    "ie-technology.png": (
+        f"{RAW}/ie-grid-pipeline/main/docs/img/technology.png",
+        "EirGrid and ESB Networks, with permission",
+    ),
+    "ie-history.png": (f"{RAW}/ie-grid-pipeline/main/docs/img/history.png", "EirGrid, with permission"),
+    "ie-map.png": (f"{RAW}/ie-grid-pipeline/main/docs/img/map.png", "EirGrid, ESB Networks and OpenStreetMap"),
+}
 
 
-def grid(weeks, years, bin_weeks):
-    """Mean stocks (mb): one row per bin of weeks, one column per year; gaps filled from neighbours."""
-    rows = []
-    for y in years:
-        row = []
-        for b in range(52 // bin_weeks):
-            vals = [weeks[y][w] for w in range(b * bin_weeks + 1, (b + 1) * bin_weeks + 1) if w in weeks.get(y, {})]
-            row.append(sum(vals) / len(vals) if vals else None)
-        for j, v in enumerate(row):
-            if v is None:
-                near = [u for u in row[max(0, j - 1) : j + 2] if u is not None]
-                row[j] = sum(near) / len(near)
-        rows.append(row)
-    return [list(col) for col in zip(*rows, strict=True)]
+def chartbook(exhibit):
+    """The newest public chart book page for an exhibit, e.g. E5."""
+    pages = sorted((EF / ".local" / "chartbook" / "book").glob(f"*/public/{exhibit}.png"))
+    return pages[-1] if pages else None
 
 
-def solid(rows, dx, dy, kz, base):
-    """Closed triangle mesh: a surface over the grid, four walls and a floor.
-
-    Columns run along x and rows along y, z up. Every facet is wound so its
-    normal points out of the solid.
-    """
-    ny, nx = len(rows), len(rows[0])
-    z = [[(v - MODEL_FLOOR) * kz for v in row] for row in rows]
-    X, Y = (nx - 1) * dx, (ny - 1) * dy
-    cx, cy = X / 2, Y / 2
-    facets = []
-
-    def add(a, b, c, out):
-        n = cross(sub(b, a), sub(c, a))
-        if sum(n[k] * out[k] for k in range(3)) < 0:
-            b, c = c, b
-            n = [-v for v in n]
-        length = math.sqrt(sum(v * v for v in n)) or 1
-        facets.append(([v / length for v in n], a, b, c))
-
-    for i in range(ny - 1):
-        for j in range(nx - 1):
-            p00 = (j * dx, i * dy, z[i][j])
-            p10 = ((j + 1) * dx, i * dy, z[i][j + 1])
-            p01 = (j * dx, (i + 1) * dy, z[i + 1][j])
-            p11 = ((j + 1) * dx, (i + 1) * dy, z[i + 1][j + 1])
-            add(p00, p10, p11, (0, 0, 1))
-            add(p00, p11, p01, (0, 0, 1))
-
-    def wall(edge, out):
-        for a, b in itertools.pairwise(edge):
-            a0, b0 = (a[0], a[1], -base), (b[0], b[1], -base)
-            add(a0, b0, b, out)
-            add(a0, b, a, out)
-
-    wall([(j * dx, 0, z[0][j]) for j in range(nx)], (0, -1, 0))
-    wall([(j * dx, Y, z[-1][j]) for j in range(nx)], (0, 1, 0))
-    wall([(0, i * dy, z[i][0]) for i in range(ny)], (-1, 0, 0))
-    wall([(X, i * dy, z[i][-1]) for i in range(ny)], (1, 0, 0))
-    # The floor is a fan from its centre to every point on the walls' lower edge,
-    # so each edge is shared by exactly two facets and the mesh is watertight.
-    rim = (
-        [(j * dx, 0) for j in range(nx)]
-        + [(X, i * dy) for i in range(1, ny)]
-        + [(j * dx, Y) for j in range(nx - 2, -1, -1)]
-        + [(0, i * dy) for i in range(ny - 2, -1, -1)]
-    )
-    for (ax, ay), (bx, by) in itertools.pairwise(rim):
-        add((cx, cy, -base), (ax, ay, -base), (bx, by, -base), (0, 0, -1))
-
-    # Centre on the origin so viewers orbit the middle of the model.
-    return [(n, *[(p[0] - cx, p[1] - cy, p[2]) for p in tri]) for n, *tri in facets]
-
-
-def sub(a, b):
-    return [a[k] - b[k] for k in range(3)]
-
-
-def cross(a, b):
-    return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]
-
-
-def num(v, digits):
-    s = f"{v:.{digits}f}".rstrip("0").rstrip(".")
-    return "0" if s in ("-0", "") else s
-
-
-def ascii_stl(facets, name):
-    lines = [f"solid {name}"]
-    for n, *tri in facets:
-        lines.append("facet normal " + " ".join(num(v, 3) for v in n))
-        lines.append("outer loop")
-        lines += ["vertex " + " ".join(num(v, 2) for v in p) for p in tri]
-        lines.append("endloop")
-        lines.append("endfacet")
-    lines.append(f"endsolid {name}")
-    return "\n".join(lines)
-
-
-def binary_stl(facets, header):
-    out = bytearray(header.encode().ljust(80, b" ")[:80])
-    out += struct.pack("<I", len(facets))
-    for n, *tri in facets:
-        out += struct.pack("<12fH", *n, *[v for p in tri for v in p], 0)
-    return bytes(out)
+def gallery():
+    out = ASSETS / "gallery"
+    out.mkdir(parents=True, exist_ok=True)
+    for name, (source, licence) in GALLERY.items():
+        if isinstance(source, str) and source.startswith("chartbook:"):
+            source = chartbook(source.split(":", 1)[1])
+        if isinstance(source, str):
+            with urllib.request.urlopen(source, timeout=60) as resp:
+                (out / name).write_bytes(resp.read())
+        elif source and source.exists():
+            shutil.copyfile(source, out / name)
+        else:
+            print(f"kept the old {name}: no source on this machine")
+            continue
+        print(f"{name:<24} {licence}")
 
 
 # ---------------------------------------------------------------- README
@@ -449,26 +393,6 @@ def table(s):
     return "\n".join(["| | mb |", "|:--|--:|"] + [f"| {a} | {b} |" for a, b in rows])
 
 
-def caption(series):
-    """How to read the model, with its two big moves measured from the data."""
-    first, last = MODEL_YEARS
-    inside = [(d, kb / 1000) for d, kb in series if first <= d.year <= last]
-    peak_d, peak = max(inside, key=lambda r: r[1])
-    record = peak_d == max(series, key=lambda r: r[1])[0]
-
-    def mean(year):
-        vals = [v for d, v in inside if d.year == year]
-        return sum(vals) / len(vals)
-
-    return (
-        f"Drag to turn it and scroll to zoom. Years run left to right from {first} to {last}, and weeks run "
-        f"from January at the front to December at the back. Height is stocks above {MODEL_FLOOR} mb. "
-        f"The step up from 2014 to 2016 is the shale glut, {mean(2016) - mean(2014):.0f} mb on the yearly "
-        f"average. The highest point is the week ending {day(peak_d)}, at {peak:.1f} mb"
-        + (f", the most since the series began in {series[0][0].year}." if record else ".")
-    )
-
-
 def main():
     series = load()
     weeks = by_week(series)
@@ -477,29 +401,20 @@ def main():
     ASSETS.mkdir(exist_ok=True)
     for theme in THEMES:
         (ASSETS / f"stocks-{theme}.svg").write_text(chart(s, weeks, theme))
-
-    years = range(MODEL_YEARS[0], MODEL_YEARS[1] + 1)
-    # Years run along x, so the face towards GitHub's camera reads as a time series;
-    # weeks run along y. Inline: two-week bins keep the README light. File: every week.
-    inline = solid(grid(weeks, years, 2), dx=6.4, dy=60 / 25, kz=0.12, base=4)
-    full = solid(grid(weeks, years, 1), dx=6.4, dy=60 / 51, kz=0.12, base=4)
-    name = f"us_crude_stocks_{MODEL_YEARS[0]}_{MODEL_YEARS[1]}"
-    (ASSETS / "us-crude-stocks.stl").write_bytes(
-        binary_stl(full, f"US crude stocks ex SPR, EIA {SERIES}, weekly {MODEL_YEARS[0]}-{MODEL_YEARS[1]}")
-    )
+    if "--gallery" in sys.argv[1:]:
+        gallery()
 
     text = README.read_text()
     text = splice(text, "stocks:chart", picture(s))
     text = splice(text, "stocks:table", table(s))
-    text = splice(text, "stocks:model", caption(series) + "\n\n```stl\n" + ascii_stl(inline, name) + "\n```")
     text = splice(
         text,
         "built",
-        f"<sub>Chart and model drawn by <code>build/build.py</code> from EIA data, last built for the "
-        f"week ending {day(s['date'])}.</sub>",
+        f"<sub>Stocks chart drawn by <code>build/build.py</code> from EIA data, last built for the "
+        f"week ending {day(s['date'])}. The other charts come from the repositories named beside them.</sub>",
     )
     README.write_text(text)
-    print(f"{headline(s)}. {s['value']:.1f} mb, week ending {day(s['date'])}; {len(inline)} facets inline.")
+    print(f"{headline(s)}. {s['value']:.1f} mb, week ending {day(s['date'])}.")
 
 
 if __name__ == "__main__":
