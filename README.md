@@ -19,7 +19,7 @@ I came to this from finance and data work, where much of the job was cleaning nu
   <img alt="US commercial crude stocks are 19 mb below the five-year average: 414.4 mb in the week ending 6 Nov 2026, under the whole 2021 to 2025 range for the week." src="assets/stocks-light.svg" width="100%">
 </picture>
 
-*Figure: US commercial crude stocks are 19 mb below the five-year average. Stocks by ISO week excluding the Strategic Petroleum Reserve: 2026 so far, 2025, and the 2021 to 2025 range and average. Units: mb; weekly. Source: US Energy Information Administration, Weekly Petroleum Status Report, series WCESTUS1; public domain; as of 2026-11-06.*
+*Figure: US commercial crude stocks are 19 mb below the five-year average. Stocks by ISO week excluding the Strategic Petroleum Reserve: 2026 so far (solid), 2025 (dashed), and the 2021 to 2025 range (shaded) and average (dotted). Units: mb; weekly. Source: US Energy Information Administration, Weekly Petroleum Status Report, series WCESTUS1; public domain; as of 2026-11-06.*
 <!-- /stocks:chart -->
 
 <details>

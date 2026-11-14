@@ -42,7 +42,9 @@ MINUS = "−"
 # faint horizontal grid behind the data, 1.2 pt lines, haloed direct labels and no
 # title on the image (the finding is the caption under it in README.md). Light is the
 # look as specified; dark is the same layout with text, grid and baseline inverted
-# for GitHub's dark page, every text at least 4.5:1 on it. No red or green.
+# for GitHub's dark page, every text at least 4.5:1 on it. No red or green. Last year
+# is a clearly darker (light) or lighter (dark) grey than the average, so the two end
+# labels, which can sit close together, still match their lines by colour.
 THEMES = {
     "light": {
         "page": "#FFFFFF",
@@ -53,7 +55,7 @@ THEMES = {
         "baseline": "#B3B3B3",
         "band": "#7D8996",
         "average": "#808080",
-        "last_year": "#7D8996",
+        "last_year": "#4D4D4D",
         "current": "#0F2A4A",
     },
     "dark": {
@@ -65,7 +67,7 @@ THEMES = {
         "baseline": "#4D4D4D",
         "band": "#7D8996",
         "average": "#8C8C8C",
-        "last_year": "#8B949E",
+        "last_year": "#B3B3B3",
         "current": "#9CC0F5",
     },
 }
@@ -421,8 +423,8 @@ def caption(s):
     """What paper_style puts in <name>.tex: the finding, then units and source, never on the image."""
     return (
         f"*Figure: {headline(s)}. Stocks by ISO week excluding the Strategic Petroleum Reserve: "
-        f"{s['year']} so far, {s['year'] - 1}, and the {s['first']} to {s['last']} range and average. "
-        f"Units: mb; weekly. Source: US Energy Information Administration, Weekly Petroleum Status "
+        f"{s['year']} so far (solid), {s['year'] - 1} (dashed), and the {s['first']} to {s['last']} range "
+        f"(shaded) and average (dotted). Units: mb; weekly. Source: US Energy Information Administration, Weekly Petroleum Status "
         f"Report, series {SERIES}; public domain; as of {s['date'].isoformat()}.*"
     )
 
