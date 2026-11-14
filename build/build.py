@@ -461,8 +461,8 @@ def caption(series):
         return sum(vals) / len(vals)
 
     return (
-        f"Drag to turn it and scroll to zoom. Weeks run along the long side, January to December, "
-        f"and years run across it from {first} to {last}. Height is stocks above {MODEL_FLOOR} mb. "
+        f"Drag to turn it and scroll to zoom. Years run left to right from {first} to {last}, and weeks run "
+        f"from January at the front to December at the back. Height is stocks above {MODEL_FLOOR} mb. "
         f"The step up from 2014 to 2016 is the shale glut, {mean(2016) - mean(2014):.0f} mb on the yearly "
         f"average. The highest point is the week ending {day(peak_d)}, at {peak:.1f} mb"
         + (f", the most since the series began in {series[0][0].year}." if record else ".")

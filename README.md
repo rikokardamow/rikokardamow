@@ -85,91 +85,121 @@ Click a point or a line to see what it is.
       "type": "Feature",
       "properties": {
         "Project": "nordcast",
-        "Forecast": "DK1 power imbalance, every quarter-hour, 15, 30 and 60 minutes ahead",
-        "Scored against": "Energinet's first published figure",
-        "Record since": "28 October 2026",
-        "marker-color": "#1F5FBF"
+        "Forecasts": "DK1 power imbalance",
+        "How often": "Every quarter-hour",
+        "Horizons": "15, 30 and 60 minutes",
+        "Scored on": "Energinet's first figure",
+        "Since": "28 October 2026"
       },
-      "geometry": { "type": "Point", "coordinates": [9.74, 55.56] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.74, 55.56]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "Project": "ie-grid-pipeline",
-        "Record": "Every EirGrid and ESB Networks connection list since 2015",
-        "Waiting to connect": "16.57 GW (report of 30 October 2026)",
-        "marker-color": "#1F5FBF"
+        "Records": "Ireland's grid connection queue",
+        "Lists kept": "EirGrid and ESB Networks",
+        "Since": "2015",
+        "Waiting": "16.57 GW, at 30 October 2026"
       },
-      "geometry": { "type": "Point", "coordinates": [-6.23, 53.33] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-6.23, 53.33]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "Project": "US crude stocks record",
-        "Forecast": "Weekly change in US commercial crude stocks, frozen before the EIA release",
-        "Why Cushing": "The delivery point for WTI; the record covers all US commercial stocks",
-        "Status": "Private until there are enough weeks to judge it",
-        "marker-color": "#0F2A4A"
+        "Forecasts": "Weekly change in crude stocks",
+        "Frozen": "Before each EIA release",
+        "Why Cushing": "Delivery point for WTI",
+        "Status": "Private until enough weeks"
       },
-      "geometry": { "type": "Point", "coordinates": [-96.77, 35.99] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-96.77, 35.99]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "Project": "US gas storage record",
         "Status": "Next, built the same way",
-        "Why Henry Hub": "The delivery point for NYMEX natural gas, at Erath, Louisiana",
-        "marker-color": "#7D8996"
+        "Why Henry Hub": "Delivery point for NYMEX gas"
       },
-      "geometry": { "type": "Point", "coordinates": [-92.04, 29.96] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.04, 29.96]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "Interconnector": "East West (EWIC)",
-        "Links": "Woodland, Co. Meath to Deeside, Wales",
+        "Links": "Co. Meath to Deeside, Wales",
         "Capacity": "500 MW, in service",
-        "Drawn as": "A straight line between converter stations, not the cable route",
-        "stroke": "#5B6878",
-        "stroke-width": 2
+        "Line": "Straight, not the cable route"
       },
-      "geometry": { "type": "LineString", "coordinates": [[-6.53, 53.47], [-3.06, 53.23]] }
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-6.53, 53.47],
+          [-3.06, 53.23]
+        ]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "Interconnector": "Moyle",
-        "Links": "Islandmagee, Co. Antrim to Auchencrosh, Ayrshire",
+        "Links": "Co. Antrim to Ayrshire",
         "Capacity": "500 MW, in service",
-        "Drawn as": "A straight line between converter stations, not the cable route",
-        "stroke": "#5B6878",
-        "stroke-width": 2
+        "Line": "Straight, not the cable route"
       },
-      "geometry": { "type": "LineString", "coordinates": [[-5.77, 54.83], [-4.95, 55.07]] }
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-5.77, 54.83],
+          [-4.95, 55.07]
+        ]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "Interconnector": "Greenlink",
-        "Links": "Great Island, Co. Wexford to Pembroke, Wales",
-        "Capacity": "500 MW, in commercial operation since early 2025",
-        "Drawn as": "A straight line between converter stations, not the cable route",
-        "stroke": "#5B6878",
-        "stroke-width": 2
+        "Links": "Co. Wexford to Pembroke, Wales",
+        "Capacity": "500 MW, in service since 2025",
+        "Line": "Straight, not the cable route"
       },
-      "geometry": { "type": "LineString", "coordinates": [[-6.98, 52.35], [-4.99, 51.68]] }
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-6.98, 52.35],
+          [-4.99, 51.68]
+        ]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "Interconnector": "Celtic",
-        "Links": "Ballyadam, east Cork to La Martyre, Brittany",
-        "Capacity": "700 MW, under construction; EirGrid expects commissioning in Q4 2028",
-        "Drawn as": "A straight line between converter stations, not the cable route",
-        "stroke": "#93A5BB",
-        "stroke-width": 2
+        "Links": "East Cork to Brittany",
+        "Capacity": "700 MW, being built",
+        "Due": "Q4 2028, per EirGrid",
+        "Line": "Straight, not the cable route"
       },
-      "geometry": { "type": "LineString", "coordinates": [[-8.25, 51.93], [-4.16, 48.45]] }
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-8.25, 51.93],
+          [-4.16, 48.45]
+        ]
+      }
     }
   ]
 }
@@ -178,7 +208,7 @@ Click a point or a line to see what it is.
 #### US crude stocks, 2010 to 2025, as an object
 
 <!-- stocks:model -->
-Drag to turn it and scroll to zoom. Weeks run along the long side, January to December, and years run across it from 2010 to 2025. Height is stocks above 250 mb. The step up from 2014 to 2016 is the shale glut, 144 mb on the yearly average. The highest point is the week ending 19 Jun 2020, at 540.7 mb, the most since the series began in 1982.
+Drag to turn it and scroll to zoom. Years run left to right from 2010 to 2025, and weeks run from January at the front to December at the back. Height is stocks above 250 mb. The step up from 2014 to 2016 is the shale glut, 144 mb on the yearly average. The highest point is the week ending 19 Jun 2020, at 540.7 mb, the most since the series began in 1982.
 
 ```stl
 solid us_crude_stocks_2010_2025
@@ -7116,7 +7146,7 @@ endsolid us_crude_stocks_2010_2025
 ```
 <!-- /stocks:model -->
 
-The [weekly version](assets/us-crude-stocks.stl) has every week at full resolution and is a closed solid, so it will 3D print as it is.
+The [weekly version](https://github.com/rikokardamow/rikokardamow/blob/main/assets/us-crude-stocks.stl) has every week at full resolution and is a closed solid, so it will 3D print as it is.
 
 #### What I keep coming back to
 
